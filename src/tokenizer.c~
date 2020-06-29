@@ -1,0 +1,62 @@
+#include "tokenizer.h"
+#include <stdlib.h>
+#include <stdio.h>
+#define true 1
+#define false 0
+
+/* Returns true if c is a whitespace character*/
+int space_char(char c){
+  if(c==' ' || c =='\t'){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+/* Returns true if c is not a whitespace character*/
+int non_space_char(char c) {
+  if(c != ' ' && c != '\t'){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
+
+/* Return the beginning of str*/
+char *word_start(char *str){
+  while(!non_space_char(*str)){
+    str = str + 1;
+  }
+  return str;
+}
+
+/* Return the end of word*/
+char *word_terminator(char *word){
+  while(non_space_char((*word))){
+    word = word + 1;
+  }
+  return word;
+}
+
+/*Returns the count of words*/
+int count_words(char* str){
+  int out_count = 0;
+  int in_count = 1;
+  int curr_state = out_count;
+  int count = 0;
+
+  while(*str){
+    if(*str == ' ' || *str == '\n' || *str == '\t'){
+      curr_state = out_count;
+    }
+    else if (curr_state == out_count){
+      curr_state = in_count;
+      count++;
+    }
+    str++;
+  }
+  return count;
+}
+
