@@ -1,33 +1,48 @@
-#include <stdlib.h>
+//#include <stdlib.h>
 #include <stdio.h>
+#include "history.h"
 #include "tokenizer.h"
 #define MAX 100
 
+
+
 int main(){
-  char input[100];
-  printf("\n Welcome, please enter your sentence. To quit enter 0. \n");
-  print("< ");
+  printf("\n Welcome, Please enter your sentence. To quit enter 0. \n");
+  char input[MAX];
   fgets(input, MAX, stdin);
 
   if(input[0] == '0'){
-    printf("\n Thank you for participating, exiting... ");
+    printf("Thank you for participating, exiting... ");
+    printf("\n");
     exit(0);
   }
 
-  printf("%s\n", input);
+  printf("\n");
+  printf("word_start testing...\n");
+  char *str=&input[0];
+  char *start = word_start(str);
+  printf("beginning with: %c\n", *start);
+  printf("place: %d\n", *start);
+  printf("\n");
 
-  char *ws = word_start(input);
-  printf("Word starting at: %s\n", ws);
+  printf("word_terminator testing...\n");
+  char *end = word_terminator(str);
+  printf("ending with: %c\n", *end);
+  printf("ending with: %d\n", *end, "\n");
 
-  char *we = word_terminator(input);
-  printf("Word ending at: %s\n", we);
+  printf("\n");
+  printf("count_words testing...\n");
+  int counter = count_words(str);
+  printf("your sentence has this many words: %d\n", counter);
 
-  int total_words = count_words(input);
-  printf("The total number of words are: %d\n", total_words);
+  printf("\n");
+  printf("tokenizer testing...\n");
+  char **token = tokenize(str);
 
-  if(input[0] != '0')
-    int keep = main();
-
-  return 0;
+  printf("\n");
+  printf("print_tokens testing...\n");
+  printf("tokenizing string...: \n");
+  print_tokens(token);
+  free_tokens(token);
 }
     

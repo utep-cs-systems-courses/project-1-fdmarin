@@ -60,6 +60,22 @@ int count_words(char* str){
   return count;
 }
 
+int length_of_string(char *str){
+
+  int length = -1;
+
+  while(str++){ //iterates through the string
+
+    length++; //adds to counter
+
+  }
+
+  return length;
+
+  exit(0);
+
+}
+
 /* Returns a freshly allocated new zero-terminated string*/
 char *copy_str(char *strIn, short len){
   char* help = strIn;
@@ -70,8 +86,8 @@ char *copy_str(char *strIn, short len){
   strCopy[len] = '\0';
 
   int index = 0;
-  while(*helper != '\0'){
-    strCopy[index++] = *helper++;
+  while(*help != '\0'){
+    strCopy[index++] = *help++;
   }
   return strCopy;
 }
@@ -104,7 +120,7 @@ char** tokenize(char* str){
 }
 
 //prints all tokens//
-void print_token(char **token){
+void print_tokens(char **token){
   int i = 0;
   while(token[i] != NULL) {
     printf("%s\n", token[i]);
@@ -113,9 +129,9 @@ void print_token(char **token){
 }
 
 // frees all tokens and the vector containing them. //
-void free_token(char **token){
+void free_tokens(char **token){
   int i = 0;
-  while(tokens[i]){
+  while(token[i]){
     free(token[i]);
     i++;
   }
