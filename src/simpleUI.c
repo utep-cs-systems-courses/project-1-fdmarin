@@ -43,9 +43,18 @@ int main (){
 
       char **tokens = tokenize(in);
 
-      print_tokens(tokens);/*print tokens*/
+      print_tokens(tokens);
 
-      free_tokens(tokens); /*free the emmory used to allocate the tokens*/
+      free_tokens(tokens);
+
+      printf("\n");
+      int words = count_words(in);
+      printf("The number of words in the sentence is: %d\n", words);
+      printf("\n");
+
+      char *p = word_start(in);
+      printf("Sentence starts with: %c\n", p);
+      printf("\n");
 
 
 
