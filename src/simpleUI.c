@@ -82,6 +82,7 @@ int main (){
   }
 
   printf("Thank you for participating, Exiting...");
+  printf("\n");
   free_history(list);
 
   return 0;
