@@ -4,45 +4,87 @@
 #include "tokenizer.h"
 #define MAX 100
 
+int main (){
 
+  char in[60];
 
-int main(){
-  printf("\n Welcome, Please enter your sentence. To quit enter 0. \n");
-  char input[MAX];
-  fgets(input, MAX, stdin);
+  List *list = init_history();
 
-  if(input[0] == '0'){
-    printf("Thank you for participating, exiting... ");
+  char choice;
+
+  int innerSel;
+
+  while(choice != -1){
+
+    printf("enter '1' to tokenize a string");
     printf("\n");
-    exit(0);
+    printf("enter '2' to print history");
+    printf("\n");
+    printf("enter '-1' to quit");
+    printf("\n");
+
+
+
+    scanf("%d",&choice);
+
+    char tmp;
+
+    scanf("%c",&tmp);
+
+
+
+    if(choice == 1){
+
+      printf("Enter string to tokenize:\n > ");
+
+      fgets(in,100,stdin);
+
+      add_history(list,in);
+
+      char **tokens = tokenize(in);
+
+      print_tokens(tokens);/*print tokens*/
+
+      free_tokens(tokens); /*free the emmory used to allocate the tokens*/
+
+
+
+    }
+
+    if(choice == 2){
+
+      printf("\nHistory of strings:\n");
+
+      print_history(list);
+
+      printf("\nSelect a string number to print or -1 to go back\n");
+
+
+
+      scanf("%d",&innerSel);
+
+      char tmp;
+
+      scanf("%c",&tmp);
+
+      if(innerSel != -1){
+
+	char ** token = tokenize(get_history(list,innerSel));
+
+	print_tokens(token);
+
+	free_tokens(token);
+
+      }
+
+    }
+
   }
 
-  printf("\n");
-  printf("word_start testing...\n");
-  char *str=&input[0];
-  char *start = word_start(str);
-  printf("beginning with: %c\n", *start);
-  printf("place: %d\n", *start);
-  printf("\n");
+  printf("Thank you for participating, Exiting...");
+  free_history(list);
 
-  printf("word_terminator testing...\n");
-  char *end = word_terminator(str);
-  printf("ending with: %c\n", *end);
-  printf("ending with: %d\n", *end, "\n");
-
-  printf("\n");
-  printf("count_words testing...\n");
-  int counter = count_words(str);
-  printf("your sentence has this many words: %d\n", counter);
-
-  printf("\n");
-  printf("tokenizer testing...\n");
-  char **token = tokenize(str);
-
-  printf("\n");
-  printf("print_tokens testing...\n");
-  printf("tokenizing string...: \n");
-  print_tokens(token);
-  free_tokens(token);
+  return 0;
 }
-    
+
+  
